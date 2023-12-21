@@ -1,0 +1,19 @@
+version: 2.1
+jobs:
+  build:
+    docker:
+      - image: hashicorp/terraform:latest
+    environment:
+      AWS_ACCESS_KEY_ID: AKIA5AEAEYDRGZNXKS44
+      AWS_SECRET_ACCESS_KEY: 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
+    steps:
+      - checkout
+      - run:
+          name: Terraform Init
+          command: terraform init
+      - run:
+          name: Terraform Plan
+          command: terraform plan -out=tfplan
+      - run:
+          name: Terraform Apply
+          command: terraform apply -auto-approve tfplan
